@@ -22,7 +22,7 @@ class Sphere{
     float sqrt_disc = sqrt(disc);
     float tmin = (-B - sqrt_disc);
     if(tmin >= EPSILON){
-      result.distance = tmin;
+      result.len = tmin;
       result.o = ray.get_hitpoint(tmin);//hit point
       result.d = PVector.sub(result.o, origin).div(r);//normal
       return result;
@@ -57,12 +57,12 @@ class Plane{
     PVector ray_dir = ray.d.copy();//.normalize();
     float denominator = PVector.dot(ray_dir, normal);
     Ray result = new Ray();
-    if (denominator == 0.0){
+    if (denominator == 0.0){//division by zero
       return null;
     }
     float t = PVector.dot(normal, PVector.sub(origin, ray.o))/denominator;
     if(t >= EPSILON){
-      result.distance = t;
+      result.len = t;
       result.o = ray.get_hitpoint(t);
       result.d = normal;
       return result;

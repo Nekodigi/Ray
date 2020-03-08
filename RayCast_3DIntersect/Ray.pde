@@ -1,6 +1,6 @@
 class Ray{
   PVector o, d;
-  float distance;
+  float len;
   
   Ray(){}
   
