@@ -23,3 +23,10 @@ PVector intersection(PVector s1, PVector e1, PVector s2, PVector e2) {
     return null;
   }
 }
+
+//boolean isInPolygon(PVector p, Polygon poly){//https://en.wikipedia.org/wiki/Point_in_polygon
+//  Ray ray = new Ray(p, 0);
+//  ray.polygons.add(poly);
+//  ray.update();
+//  return ray.inside;
+//}

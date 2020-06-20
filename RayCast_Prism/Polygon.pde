@@ -1,12 +1,9 @@
 class Polygon{
   ArrayList<PVector> vertices = new ArrayList<PVector>();
-  ArrayList<Barrier> barriers = new ArrayList<Barrier>();
   
-  Polygon(float x, float y, float mr, int n){
-    float Btheta = random(TWO_PI);
+  Polygon(float x, float y, float r, int n){
     for(int i = 0; i < n; i++){
-      float theta = map(i, 0, n, 0, TWO_PI)+Btheta;
-      float r = random(mr);
+      float theta = map(i, 0, n, 0, TWO_PI)+radians(30);
       vertices.add(new PVector(x+cos(theta)*r, y+sin(theta)*r));
     }
     calcBarrier();

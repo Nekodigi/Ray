@@ -5,7 +5,6 @@ Ray refrection(PVector sp, PVector d, Barrier barrier){
   n.rotate(radians(90));
   float ndotd = PVector.dot(d, n);
   PVector r = d.sub(n.mult(2).mult(ndotd));
-  println(ndotd);
   return new Ray(sp, r);
 }
 

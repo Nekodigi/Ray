@@ -32,7 +32,8 @@ class Ray{
     if(bestP != null){
        v = PVector.sub(bestP, sp);
        Ray ray = refrection(bestP.copy(), v.copy(), hitBarrier);
-       ray.update();
+       //ray.update();
+       ray.v.setMag(10000);
        ray.show();
     }
   }

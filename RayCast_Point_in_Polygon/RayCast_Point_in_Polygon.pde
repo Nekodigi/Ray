@@ -1,5 +1,4 @@
 int Nrays = 1;
-ArrayList<Barrier> barriers = new ArrayList<Barrier>();
 ArrayList<Polygon> polygons = new ArrayList<Polygon>();
 
 void setup(){
@@ -18,7 +17,7 @@ void setup(){
 void draw(){
   background(0);
   for(int i = 0; i < Nrays; i++){
-    Ray ray = new Ray(mouseX, mouseY+i, 0);
+    Ray ray = new Ray(new PVector(mouseX, mouseY+i), 0, polygons);;
     ray.update();
     if(ray.inside){
       fill(255, 0, 0);
@@ -31,9 +30,6 @@ void draw(){
   }
   fill(255, 150);
   noStroke();
-  for(Barrier barrier : barriers){
-     barrier.show();
-  }
   for(Polygon polygon : polygons){
      polygon.show();
   }

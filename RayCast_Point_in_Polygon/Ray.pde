@@ -3,6 +3,7 @@ class Ray{
   boolean estInside = false;
   boolean inside = false;
   boolean isFinal = false;
+  ArrayList<Polygon> polygons = new ArrayList<Polygon>();
   
   Ray(float ox, float oy, float dx, float dy){
     this(new PVector(ox, oy), new PVector(dx, dy));
@@ -13,8 +14,9 @@ class Ray{
     this.d = d;
   }
   
-  Ray(float ox, float oy, float angle){
-    this(ox, oy, PVector.fromAngle(angle).x, PVector.fromAngle(angle).y);
+  Ray(PVector o, float angle, ArrayList<Polygon> polygons){
+    this(o, PVector.fromAngle(angle));
+    this.polygons = polygons;
   }
   
   void marchBit(){
@@ -22,10 +24,11 @@ class Ray{
   }
   
   void update(){
-    float bestDist = 10000000;
+    float bestDist = Float.POSITIVE_INFINITY;;
     PVector bestP = null;
     Barrier hitBarrier = null;
-    for(Barrier barrier : barriers){
+    for(Polygon polygon : this.polygons){
+    for(Barrier barrier : polygon.barriers){
       PVector p = intersection(barrier.sp, barrier.ep, o, PVector.add(o, d));
       if(p != null){
         float distance = dist(p.x, p.y, o.x, o.y);
@@ -36,9 +39,10 @@ class Ray{
         }
       }
     }
+    }
     if(bestP != null){
        d = PVector.sub(bestP, o);
-       Ray ray = new Ray(bestP.x, bestP.y, 0);
+       Ray ray = new Ray(bestP, 0, polygons);
        ray.estInside = !estInside;
        ray.marchBit();
        ray.update();
